@@ -4,7 +4,7 @@ import { normalizeMention } from "../utils/normalize.js";
 
 import type { MentionInput } from "../types/mention.js";
 
-import { findBySourceAndExternalId, findByUrl, insertMention, updateMention } from "../repositories/mention.repository.js";
+import { findBySourceAndExternalId, findByUrl, insertMention, updateMention, findMentions, type FindMentionsParams, getStatsBySource, getStatsByDay } from "../repositories/mention.repository.js";
 
 export interface BulkMentionResult {
   inserted: number;
@@ -64,4 +64,19 @@ export async function processMentions(mentions: MentionInput[]): Promise<BulkMen
   } finally {
     client.release();
   }
+}
+
+// get mentions
+export async function getMentions(params: FindMentionsParams) {
+  return findMentions(params);
+}
+
+//get statistik by source
+export async function getMentionStatsBySource() {
+  return getStatsBySource();
+}
+
+//get statistik by source
+export async function getMentionStatsByDay() {
+  return getStatsByDay();
 }
