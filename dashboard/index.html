@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Media Monitoring Dashboard</title>
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header>
+        <h1>Media Monitoring</h1>
+        <p>Simple dashboard for monitoring mentions.</p>
+      </header>
+
+      <!-- Statistics -->
+      <section class="stats">
+        <div class="stat-card">
+          <span>Total Mentions</span>
+          <strong id="totalMentions">-</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>Total Sources</span>
+          <strong id="totalSources">-</strong>
+        </div>
+      </section>
+
+      <!-- Filters -->
+      <section class="filters">
+        <div class="filter-group">
+          <label for="source">Source</label>
+
+          <select id="source">
+            <option value="">All Sources</option>
+            <option value="the star">The Star</option>
+            <option value="new straits times">New Straits Times</option>
+            <option value="malaysiakini">Malaysiakini</option>
+            <option value="twitter">Twitter</option>
+            <option value="facebook">Facebook</option>
+            <option value="instagram">Instagram</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="from">From</label>
+          <input type="date" id="from" />
+        </div>
+
+        <div class="filter-group">
+          <label for="to">To</label>
+          <input type="date" id="to" />
+        </div>
+
+        <div class="filter-group search-group">
+          <label for="search">Search</label>
+
+          <input type="text" id="search" placeholder="Search title or content..." />
+        </div>
+
+        <button id="filterButton">Apply Filter</button>
+      </section>
+
+      <!-- Mentions -->
+      <section class="mentions-section">
+        <div class="section-header">
+          <h2>Mentions</h2>
+
+          <span id="resultInfo"> Loading... </span>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Published</th>
+                <th>Engagement</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="mentionsTable"></tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <button id="previousButton">← Previous</button>
+
+          <span id="pageInfo"> Page 1 </span>
+
+          <button id="nextButton">Next →</button>
+        </div>
+      </section>
+
+      <!-- Statistics -->
+      <section class="analytics">
+        <div class="chart-card">
+          <h2>Mentions by Source</h2>
+
+          <div id="sourceStats">Loading...</div>
+        </div>
+
+        <div class="chart-card">
+          <h2>Mentions by Day</h2>
+
+          <div id="dayStats">Loading...</div>
+        </div>
+      </section>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
