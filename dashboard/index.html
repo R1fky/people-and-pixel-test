@@ -65,6 +65,41 @@
         <button id="filterButton">Apply Filter</button>
       </section>
 
+      <!-- Bulk Create -->
+      <section class="bulk-section">
+        <div class="section-header">
+          <div>
+            <h2>Bulk Add Mentions</h2>
+            <p>Insert multiple mentions using JSON format.</p>
+          </div>
+        </div>
+
+        <textarea
+          id="bulkInput"
+          rows="12"
+          placeholder='{
+  "mentions": [
+    {
+      "external_id": "str-99120",
+      "source": "The Star",
+      "title": "Ringgit strengthens...",
+      "content": "<p>The ringgit opened higher...</p>",
+      "url": "https://example.com",
+      "author": "Aisyah Rahman",
+      "published_at": "2026-08-10T08:15:00Z",
+      "engagement": 412
+    }
+  ]
+}'
+        ></textarea>
+
+        <div class="bulk-actions">
+          <button id="bulkButton">Add Mentions</button>
+
+          <span id="bulkStatus"></span>
+        </div>
+      </section>
+
       <!-- Mentions -->
       <section class="mentions-section">
         <div class="section-header">

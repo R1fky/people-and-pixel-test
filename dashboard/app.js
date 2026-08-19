@@ -292,6 +292,85 @@ async function loadSummary() {
 }
 
 /* =========================================
+   BULK CREATE MENTIONS
+========================================= */
+async function bulkCreateMentions() {
+  const input = document.getElementById("bulkInput");
+  const status = document.getElementById("bulkStatus");
+  const button = document.getElementById("bulkButton");
+
+  const value = input.value.trim();
+
+  // 1. Validasi input kosong
+  if (!value) {
+    status.textContent = "Please enter JSON data.";
+    return;
+  }
+
+  let payload;
+
+  // 2. Validasi format sintaks JSON
+  try {
+    payload = JSON.parse(value);
+  } catch (error) {
+    status.textContent = "Invalid JSON format.";
+    return;
+  }
+
+  // 3. Validasi struktur objek {"mentions": [...]}
+  if (!payload || !payload.mentions || !Array.isArray(payload.mentions)) {
+    status.textContent = "JSON must contain a 'mentions' array.";
+    return;
+  }
+
+  if (payload.mentions.length === 0) {
+    status.textContent = "No mentions provided dalam array.";
+    return;
+  }
+
+  // Kunci tombol saat proses kirim berlangsung
+  button.disabled = true;
+  status.textContent = "Adding mentions...";
+
+  try {
+    // 4. Kirim data objek utuh ke backend Express
+    const response = await fetch(`${API_BASE_URL}/bulk`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload), // Mengirim objek {"mentions": [...]}
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Failed to add mentions");
+    }
+
+    // 5. Berhasil dimasukkan
+    status.textContent = `Successfully added ${payload.mentions.length} mentions.`;
+    input.value = "";
+    currentPage = 1;
+
+    // Refresh data tampilan UI Anda
+    await fetchMentions();
+    await fetchSourceStats();
+    await fetchDayStats();
+    await loadSummary();
+  } catch (error) {
+    console.error(error);
+    status.textContent = error.message || "Failed to add mentions.";
+  } finally {
+    // Buka kembali kunci tombol
+    button.disabled = false;
+  }
+}
+
+// 6. Hubungkan fungsi ke tombol HTML Anda agar bisa diklik
+document.getElementById("bulkButton").addEventListener("click", bulkCreateMentions);
+
+/* =========================================
    FORMAT DATE
 ========================================= */
 
