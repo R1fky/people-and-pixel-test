@@ -113,6 +113,28 @@ Server running on http://localhost:5000
 
 ---
 
+---
+
+## 💻 Cara Menjalankan Frontend Dasbor
+
+Untuk sisi antarmuka (_front-end_), tidak perlu melakukan proses _build_ atau instalasi rumit. Cukup jalankan file HTML utama menggunakan server statis lokal agar fitur integrasi API berjalan lancar.
+
+### Pilihan 1: Menggunakan Ekstensi VS Code "Live Server"
+
+1. Pastikan sudah memasang ekstensi **Live Server** (oleh Ritwick Dey) di VS Code.
+2. Buka folder proyek atau langsung buka file `index.html`.
+3. Klik kanan pada file `index.html` lalu pilih **"Open with Live Server"**, atau klik tombol **"Go Live"** di pojok kanan bawah jendela VS Code.
+4. Aplikasi otomatis terbuka di browser dengan alamat default `http://127.0.0` atau `http://localhost:5500/`.
+
+### Pilihan 2: Menggunakan Ekstensi VS Code "Live Preview"
+
+1. Pastikan sudah memasang ekstensi resmi **Live Preview** (oleh Microsoft) di VS Code.
+2. Klik kanan pada file `index.html`, lalu pilih **"Live Preview: Show Preview"**.
+3. Halaman dasbor akan langsung muncul di dalam bilah editor VS Code secara _real-time_.
+
+> ⚠️ **Penting untuk Menghindari Bentrok Port:**  
+> Backend Express proyek ini sengaja dikonfigurasi pada port **`5000`** agar port default **`3000`** atau **`5500`** bisa bebas digunakan oleh _Live Server/Live Preview_ tanpa menyebabkan kegagalan sistem (_port conflict_). Pastikan variabel `API_BASE_URL` di berkas `app.js` sudah mengarah ke `http://localhost:5000/internal/mentions`.
+
 ## Daftar Endpoint API
 
 Semua rute (_endpoint_) API berjalan di alamat dasar `http://localhost:5000/internal/mentions`:
